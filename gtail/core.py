@@ -11,6 +11,17 @@ __version__ = '0.0.1'
 
 LOG_PATTERN = "(?P<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) \[(?P<level>.+)\] (?P<message>.+)"
 
+SEVERITY = {
+    'CRITICAL': 5,
+    'FATAL': 5,
+    'ERROR': 4,
+    'WARNING': 3,
+    'WARN': 3,
+    'INFO': 2,
+    'DEBUG': 1,
+    'NOTSET': 0
+}
+
 
 class DummyGelf():
 
@@ -37,6 +48,7 @@ def regex_parse(line, pattern):
             return default
         else:
             result = f.groupdict()
+            result['level'] = SEVERITY.get(result.get('level'), 0)
             if result.get('datetime'):
                 dt = datetime.datetime.strptime(result.get('datetime'), '%Y-%m-%d %H:%M:%S,%f')
                 result['datetime'] = time.mktime(dt.timetuple())
