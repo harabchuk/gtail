@@ -1,2 +1,2 @@
 # gtail
-GrayLog2 tail sender
+Command line utility for sending log files to GrayLog2

@@ -1,0 +1,1 @@
+from gtail.core import __version__

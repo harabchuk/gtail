@@ -1,0 +1,2 @@
+gelfclient==0.0.5
+tailhead==1.0.2
