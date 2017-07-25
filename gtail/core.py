@@ -9,7 +9,7 @@ import time
 
 __version__ = '0.0.1'
 
-LOG_PATTERN = "(?P<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) \[(?P<level>.+)\] (?P<full_message>.+)"
+LOG_PATTERN = "(?P<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}) \[(?P<level>.+)\] (?P<short_message>.+)"
 
 SEVERITY = {
     'CRITICAL': 5,
@@ -41,7 +41,7 @@ def follow(log_file_path, sleep=1.0, send_func=None):
 
 
 def regex_parse(line, pattern):
-    default = {'full_message': line, 'datetime': '', 'level': 'INFO'}
+    default = {'short_message': line, 'datetime': '', 'level': 'INFO'}
     try:
         f = re.search(pattern, line)
         if not f:
